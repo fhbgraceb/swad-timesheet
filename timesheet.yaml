@@ -2,16 +2,13 @@ openapi: 3.0.3
 info:
   title: Timesheet - OpenAPI 3.0
   description: This is a simple timeshoot tool... (coming soon)
-  termsOfService: http://swagger.io/terms/
   contact:
     email: fhb190776@fh-vie.ac.at
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.11
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
+
 tags:
   - name: timesheet
     description: See a list of all working hours
@@ -20,9 +17,6 @@ tags:
       url: http://swagger.io
   - name: project-hours
     description: Acces list of workings hours by a particular project
-    externalDocs:
-      description: Description coming soon
-      url: http://swagger.io
   - name: user
     description: Operations about user
 paths:
@@ -42,9 +36,6 @@ paths:
           application/xml:
             schema:
               $ref: '#/components/schemas/Timesheet'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Timesheet'
         required: true
       responses:
         '200':
@@ -62,10 +53,6 @@ paths:
           description: Timeslot not found
         '405':
           description: Validation exception
-      security:
-        - timesheet_auth:
-            - write:Timesheet
-            - read:Timesheet
     post:
       tags:
         - timesheet
@@ -81,9 +68,6 @@ paths:
           application/xml:
             schema:
               $ref: '#/components/schemas/Timesheet'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Timesheet'
         required: true
       responses:
         '200':
@@ -97,10 +81,6 @@ paths:
                 $ref: '#/components/schemas/Timesheet'
         '405':
           description: Invalid input
-      security:
-        - timesheet_auth:
-            - write:Timesheet
-            - read:Timesheet
     delete:
       tags:
         - timesheet
@@ -117,10 +97,6 @@ paths:
       responses:
         '400':
           description: Invalid timesheet value
-      security:
-        - timesheet_auth:
-            - write:Timesheet
-            - read:Timesheet
   /timesheet/findTimeslot:
     get:
       tags:
@@ -140,10 +116,6 @@ paths:
                 $ref: '#/components/schemas/Timesheet'
         '405':
           description: Invalid input
-      security:
-        - timesheet_auth:
-            - write:Timesheet
-            - read:Timesheet
   /project-hours:
     get:
       tags:
@@ -161,8 +133,6 @@ paths:
                 additionalProperties:
                   type: integer
                   format: int32
-      security:
-        - api_key: []
     post:
       tags:
         - project-hours
@@ -175,9 +145,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Project-hours'
           application/xml:
-            schema:
-              $ref: '#/components/schemas/Project-hours'
-          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/Project-hours'
       responses:
@@ -194,7 +161,7 @@ paths:
       tags:
         - project-hours
       summary: Find Project by ID
-      description: For valid response try integer IDs with value <= 5 or > 10.
+      description: For valid response try integer IDs with value less then 5 or higher 10.
       operationId: getproject-hoursById
       parameters:
         - name: project-hoursId
@@ -222,7 +189,7 @@ paths:
       tags:
         - project-hours
       summary: Delete project by ID
-      description: For valid response try integer IDs with value < 10.
+      description: For valid response try integer IDs with value less then 10.
       operationId: deleteproject
       parameters:
         - name: project-hoursId
@@ -251,9 +218,6 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
           application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/User'
       responses:
@@ -513,16 +477,3 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/User'
-  securitySchemes:
-    timesheet_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://timesheet3.swagger.io/oauth/authorize
-          scopes:
-            write:Timesheet: modify Timesheet in your account
-            read:Timesheet: read your Timesheet
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
