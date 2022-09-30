@@ -28,9 +28,6 @@ paths:
       requestBody:
         description: Update an existent time
         content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Timesheet'
           application/xml:
             schema:
               $ref: '#/components/schemas/Timesheet'
@@ -39,9 +36,6 @@ paths:
         '200':
           description: Successful operation
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Timesheet'
             application/xml:
               schema:
                 $ref: '#/components/schemas/Timesheet'
@@ -60,9 +54,6 @@ paths:
       requestBody:
         description: Create a new timeslot in all working hours timesheet
         content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Timesheet'
           application/xml:
             schema:
               $ref: '#/components/schemas/Timesheet'
@@ -71,9 +62,6 @@ paths:
         '200':
           description: Successful operation
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Timesheet'
             application/xml:
               schema:
                 $ref: '#/components/schemas/Timesheet'
@@ -106,9 +94,6 @@ paths:
         '200':
           description: Successful operation
           content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Timesheet'
             application/xml:
               schema:
                 $ref: '#/components/schemas/Timesheet'
