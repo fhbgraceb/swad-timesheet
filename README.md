@@ -11,6 +11,6 @@ For detail walk through on things we done check ThingsDone.md
 
 ## Meta
 * Diana-Grace Bernal [mailto:fhb190776@fh-vie.ac.at]
-* Natalie Bruckmüller [mailto:fhb190776@fh-vie.ac.at]
-* Florian Bürbaumer [mailto:fhb190776@fh-vie.ac.at]
+* Natalie Bruckmüller [mailto:fhb201236@fh-vie.ac.at]
+* Florian Bürbaumer [mailto:fhb190777@fh-vie.ac.at]
 
