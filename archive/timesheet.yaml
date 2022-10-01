@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Timesheet - OpenAPI 3.0
+  description: This is a simple timeshoot tool... (coming soon)
+  contact:
+    email: fhb190776@fh-vie.ac.at
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+
+tags:
+  - name: timesheet
+    description: See a list of all working hours
+    externalDocs:
+      description: Description coming soon
+      url: http://swagger.io
+  - name: project-hours
+    description: Acces list of workings hours by a particular project
+paths:
+  /timesheet:
+    put:
+      tags:
+        - timesheet
+      summary: Update an existing timeslot
+      description: Update an existing time by Id
+      operationId: updateTime
+      requestBody:
+        description: Update an existent time
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Timeslot not found
+        '405':
+          description: Validation exception
+    post:
+      tags:
+        - timesheet
+      summary: Add a new timeslot
+      description: Add a new timeslot to all working hours
+      operationId: addTimeslot
+      requestBody:
+        description: Create a new timeslot in all working hours timesheet
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+        '405':
+          description: Invalid input
+    delete:
+      tags:
+        - timesheet
+      summary: Deletes a timeslot
+      description: delete a timeslot
+      operationId: deleteTimeslot
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid timesheet value
+  /timesheet/findTimeslot:
+    get:
+      tags:
+        - timesheet
+      summary: Finds Timeslot by date
+      description: description coming soon ...
+      operationId: findTimeslotbydate
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+        '405':
+          description: Invalid input
+  /project-hours:
+    get:
+      tags:
+        - project-hours
+      summary: Returns hours of a project
+      description: Returns hours of a project
+      operationId: getProject-hours
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int32
+    post:
+      tags:
+        - project-hours
+      summary: Place an timeslot for a project
+      description: Place a new timeslot in the project-hours list
+      operationId: placeProject-hours
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Project-hours'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project-hours'
+        '405':
+          description: Invalid input
+  /project/{project-hoursId}:
+    get:
+      tags:
+        - project-hours
+      summary: Find Project by ID
+      description: For valid response try integer IDs with value less then 5 or higher 10.
+      operationId: getproject-hoursById
+      parameters:
+        - name: project-hoursId
+          in: path
+          description: ID of project that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: project-hours not found
+    delete:
+      tags:
+        - project-hours
+      summary: Delete project by ID
+      description: For valid response try integer IDs with value less then 10.
+      operationId: deleteproject
+      parameters:
+        - name: project-hoursId
+          in: path
+          description: ID of the project-hours that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: project not found
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        pid:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+      xml:
+        name: project
+    Timesheet:
+      type: object
+      properties:
+        tid:
+          type: integer
+          format: int64
+          example: 1
+        weekday:
+          type: string
+          format: date
+          example: Monday
+        Start:
+          type: string
+          format: date-time
+        End:
+          type: string
+          format: date-time
+        working-hours:
+          type: number
+          format: double
+      xml:
+        name: timesheet
+    Project-hours:
+      type: object
+      properties:
+        pid:
+          type: integer
+          format: int64
+          example: 1
+        tid:
+          type: integer
+          format: int64
+          example: 1
+        working-hours:
+          type: number
+          format: double
+      xml:
+        name: timesheet
+  requestBodies:
+    Timeslot:
+      description: Timeslot
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Timesheet'
