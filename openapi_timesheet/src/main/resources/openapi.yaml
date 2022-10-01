@@ -1,0 +1,583 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: fhb190776@fh-vie.ac.at
+  description: This is a simple timeshoot tool... (coming soon)
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Timesheet - OpenAPI 3.0
+  version: 1.0.11
+servers:
+- url: /
+tags:
+- description: See a list of all working hours
+  externalDocs:
+    description: Description coming soon
+    url: http://swagger.io
+  name: timesheet
+- description: Acces list of workings hours by a particular project
+  name: project-hours
+- description: Operations about user
+  name: user
+paths:
+  /timesheet:
+    delete:
+      description: delete a timeslot
+      operationId: deleteTimeslot
+      parameters:
+      - description: ""
+        explode: false
+        in: header
+        name: api_key
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "400":
+          description: Invalid timesheet value
+      summary: Deletes a timeslot
+      tags:
+      - timesheet
+      x-accepts: application/json
+      x-tags:
+      - tag: timesheet
+    post:
+      description: Add a new timeslot to all working hours
+      operationId: addTimeslot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+        description: Create a new timeslot in all working hours timesheet
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+          description: Successful operation
+        "405":
+          description: Invalid input
+      summary: Add a new timeslot
+      tags:
+      - timesheet
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: timesheet
+    put:
+      description: Update an existing time by Id
+      operationId: updateTime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Timesheet'
+        description: Update an existent time
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Timeslot not found
+        "405":
+          description: Validation exception
+      summary: Update an existing timeslot
+      tags:
+      - timesheet
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: timesheet
+  /timesheet/findTimeslot:
+    get:
+      description: description coming soon ...
+      operationId: findTimeslotbydate
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Timesheet'
+          description: Successful operation
+        "405":
+          description: Invalid input
+      summary: Finds Timeslot by date
+      tags:
+      - timesheet
+      x-accepts: application/json
+      x-tags:
+      - tag: timesheet
+  /project-hours:
+    get:
+      description: Returns hours of a project
+      operationId: getProject-hours
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  format: int32
+                  type: integer
+                type: object
+          description: successful operation
+      summary: Returns hours of a project
+      tags:
+      - project-hours
+      x-accepts: application/json
+      x-tags:
+      - tag: project-hours
+    post:
+      description: Place a new timeslot in the project-hours list
+      operationId: placeProject-hours
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project-hours'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Project-hours'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project-hours'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project-hours'
+          description: successful operation
+        "405":
+          description: Invalid input
+      summary: Place an timeslot for a project
+      tags:
+      - project-hours
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: project-hours
+  /project/{project-hoursId}:
+    delete:
+      description: For valid response try integer IDs with value less then 10.
+      operationId: deleteproject
+      parameters:
+      - description: ID of the project-hours that needs to be deleted
+        explode: false
+        in: path
+        name: project-hoursId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: project not found
+      summary: Delete project by ID
+      tags:
+      - project-hours
+      x-accepts: application/json
+      x-tags:
+      - tag: project-hours
+    get:
+      description: For valid response try integer IDs with value less then 5 or higher
+        10.
+      operationId: getproject-hoursById
+      parameters:
+      - description: ID of project that needs to be fetched
+        explode: false
+        in: path
+        name: project-hoursId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: project-hours not found
+      summary: Find Project by ID
+      tags:
+      - project-hours
+      x-accepts: application/json
+      x-tags:
+      - tag: project-hours
+  /user:
+    post:
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Created user object
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: successful operation
+      summary: Create user
+      tags:
+      - user
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+  /user/createWithList:
+    post:
+      description: Creates list of users with given input array
+      operationId: createUsersWithListInput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/User'
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Successful operation
+        default:
+          description: successful operation
+      summary: Creates list of users with given input array
+      tags:
+      - user
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+  /user/login:
+    get:
+      description: ""
+      operationId: loginUser
+      parameters:
+      - description: The user name for login
+        explode: true
+        in: query
+        name: username
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The password for login in clear text
+        explode: true
+        in: query
+        name: password
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/xml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              explode: false
+              schema:
+                format: int32
+                type: integer
+              style: simple
+            X-Expires-After:
+              description: date in UTC when token expires
+              explode: false
+              schema:
+                format: date-time
+                type: string
+              style: simple
+        "400":
+          description: Invalid username/password supplied
+      summary: Logs user into the system
+      tags:
+      - user
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+  /user/logout:
+    get:
+      description: ""
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+      summary: Logs out current logged in user session
+      tags:
+      - user
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+  /user/{username}:
+    delete:
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+      - description: The name that needs to be deleted
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+      summary: Delete user
+      tags:
+      - user
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+    get:
+      description: ""
+      operationId: getUserByName
+      parameters:
+      - description: 'The name that needs to be fetched. Use user1 for testing. '
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: successful operation
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+      summary: Get user by user name
+      tags:
+      - user
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+    put:
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+      - description: name that need to be deleted
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Update an existent user in the store
+      responses:
+        default:
+          description: successful operation
+      summary: Update user
+      tags:
+      - user
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+components:
+  requestBodies:
+    Timeslot:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Timesheet'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Timesheet'
+      description: Timeslot
+    UserArray:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/User'
+            type: array
+      description: List of user object
+  schemas:
+    Project:
+      example:
+        name: name
+        pid: 10
+      properties:
+        pid:
+          example: 10
+          format: int64
+          type: integer
+        name:
+          type: string
+      type: object
+      xml:
+        name: project
+    Timesheet:
+      example:
+        Start: 2000-01-23T04:56:07.000+00:00
+        working-hours: 0.8008281904610115
+        weekday: 2000-01-23
+        End: 2000-01-23T04:56:07.000+00:00
+        tid: 1
+      properties:
+        tid:
+          example: 1
+          format: int64
+          type: integer
+        weekday:
+          format: date
+          type: string
+        Start:
+          format: date-time
+          type: string
+        End:
+          format: date-time
+          type: string
+        working-hours:
+          format: double
+          type: number
+      type: object
+      xml:
+        name: timesheet
+    Project-hours:
+      example:
+        working-hours: 0.8008281904610115
+        pid: 1
+        tid: 1
+      properties:
+        pid:
+          example: 1
+          format: int64
+          type: integer
+        tid:
+          example: 1
+          format: int64
+          type: integer
+        working-hours:
+          format: double
+          type: number
+      type: object
+      xml:
+        name: timesheet
+    User:
+      example:
+        firstName: John
+        lastName: James
+        password: "12345"
+        id: 10
+        email: john@email.com
+        username: theUser
+      properties:
+        id:
+          example: 10
+          format: int64
+          type: integer
+        username:
+          example: theUser
+          type: string
+        firstName:
+          example: John
+          type: string
+        lastName:
+          example: James
+          type: string
+        email:
+          example: john@email.com
+          type: string
+        password:
+          example: "12345"
+          type: string
+      type: object
+      xml:
+        name: user
