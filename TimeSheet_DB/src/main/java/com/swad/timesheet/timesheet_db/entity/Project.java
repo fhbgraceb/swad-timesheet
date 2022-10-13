@@ -17,7 +17,7 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long pid;
+    private int pid;
     private String name;
 
 

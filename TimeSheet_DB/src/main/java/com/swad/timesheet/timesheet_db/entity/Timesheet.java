@@ -18,7 +18,7 @@ public class Timesheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long tid;
+    private int tid;
     private String weekday;
     private String start;
     private String end;

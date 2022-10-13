@@ -18,7 +18,7 @@ public class ProjectHour {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long pHid;
+    private int pHid;
     private double bookedHours;
 
     @ManyToOne
