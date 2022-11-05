@@ -1,20 +1,17 @@
 package org.openapitools.model;
 
-import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
@@ -31,13 +28,13 @@ public class Timesheet {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate weekday;
 
-  @JsonProperty("Start")
+  @JsonProperty("StartTime")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime start;
+  private OffsetDateTime startTime;
 
-  @JsonProperty("End")
+  @JsonProperty("EndTime")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime end;
+  private OffsetDateTime endTime;
 
   @JsonProperty("working-hours")
   private Double workingHours;
@@ -81,7 +78,7 @@ public class Timesheet {
   }
 
   public Timesheet start(OffsetDateTime start) {
-    this.start = start;
+    this.startTime = start;
     return this;
   }
 
@@ -91,16 +88,16 @@ public class Timesheet {
   */
   @Valid 
   @Schema(name = "Start", required = false)
-  public OffsetDateTime getStart() {
-    return start;
+  public OffsetDateTime getStartTime() {
+    return startTime;
   }
 
-  public void setStart(OffsetDateTime start) {
-    this.start = start;
+  public void setStartTime(OffsetDateTime startTime) {
+    this.startTime = startTime;
   }
 
   public Timesheet end(OffsetDateTime end) {
-    this.end = end;
+    this.endTime = end;
     return this;
   }
 
@@ -110,12 +107,12 @@ public class Timesheet {
   */
   @Valid 
   @Schema(name = "End", required = false)
-  public OffsetDateTime getEnd() {
-    return end;
+  public OffsetDateTime getEndTime() {
+    return endTime;
   }
 
-  public void setEnd(OffsetDateTime end) {
-    this.end = end;
+  public void setEndTime(OffsetDateTime endTime) {
+    this.endTime = endTime;
   }
 
   public Timesheet workingHours(Double workingHours) {
@@ -148,14 +145,14 @@ public class Timesheet {
     Timesheet timesheet = (Timesheet) o;
     return Objects.equals(this.tid, timesheet.tid) &&
         Objects.equals(this.weekday, timesheet.weekday) &&
-        Objects.equals(this.start, timesheet.start) &&
-        Objects.equals(this.end, timesheet.end) &&
+        Objects.equals(this.startTime, timesheet.startTime) &&
+        Objects.equals(this.endTime, timesheet.endTime) &&
         Objects.equals(this.workingHours, timesheet.workingHours);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tid, weekday, start, end, workingHours);
+    return Objects.hash(tid, weekday, startTime, endTime, workingHours);
   }
 
   @Override
@@ -164,8 +161,8 @@ public class Timesheet {
     sb.append("class Timesheet {\n");
     sb.append("    tid: ").append(toIndentedString(tid)).append("\n");
     sb.append("    weekday: ").append(toIndentedString(weekday)).append("\n");
-    sb.append("    start: ").append(toIndentedString(start)).append("\n");
-    sb.append("    end: ").append(toIndentedString(end)).append("\n");
+    sb.append("    start: ").append(toIndentedString(startTime)).append("\n");
+    sb.append("    end: ").append(toIndentedString(endTime)).append("\n");
     sb.append("    workingHours: ").append(toIndentedString(workingHours)).append("\n");
     sb.append("}");
     return sb.toString();

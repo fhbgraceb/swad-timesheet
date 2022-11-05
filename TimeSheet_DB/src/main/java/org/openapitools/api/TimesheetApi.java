@@ -71,12 +71,12 @@ public interface TimesheetApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"Start\" : \"2000-01-23T04:56:07.000+00:00\", \"working-hours\" : 0.8008281904610115, \"weekday\" : \"2000-01-23\", \"End\" : \"2000-01-23T04:56:07.000+00:00\", \"tid\" : 1 }";
+                    String exampleString = "{ \"StartTime\" : \"2000-01-23T04:56:07.000+00:00\", \"working-hours\" : 0.8008281904610115, \"weekday\" : \"2000-01-23\", \"EndTime\" : \"2000-01-23T04:56:07.000+00:00\", \"tid\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    String exampleString = "<timesheet> <tid>1</tid> <weekday>2000-01-23</weekday> <Start>2000-01-23T04:56:07.000Z</Start> <End>2000-01-23T04:56:07.000Z</End> <working-hours>3.149</working-hours> </timesheet>";
+                    String exampleString = "<timesheet> <tid>1</tid> <weekday>2000-01-23</weekday> <StartTime>2000-01-23T04:56:07.000Z</StartTime> <EndTime>2000-01-23T04:56:07.000Z</EndTime> <working-hours>3.149</working-hours> </timesheet>";
                     ApiUtil.setExampleResponse(request, "application/xml", exampleString);
                     break;
                 }
@@ -144,12 +144,12 @@ public interface TimesheetApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"Start\" : \"2000-01-23T04:56:07.000+00:00\", \"working-hours\" : 0.8008281904610115, \"weekday\" : \"2000-01-23\", \"End\" : \"2000-01-23T04:56:07.000+00:00\", \"tid\" : 1 }";
+                    String exampleString = "{ \"StartTime\" : \"2000-01-23T04:56:07.000+00:00\", \"working-hours\" : 0.8008281904610115, \"weekday\" : \"2000-01-23\", \"EndTime\" : \"2000-01-23T04:56:07.000+00:00\", \"tid\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    String exampleString = "<timesheet> <tid>1</tid> <weekday>2000-01-23</weekday> <Start>2000-01-23T04:56:07.000Z</Start> <End>2000-01-23T04:56:07.000Z</End> <working-hours>3.149</working-hours> </timesheet>";
+                    String exampleString = "<timesheet> <tid>1</tid> <weekday>2000-01-23</weekday> <StartTime>2000-01-23T04:56:07.000Z</StartTime> <EndTime>2000-01-23T04:56:07.000Z</EndTime> <working-hours>3.149</working-hours> </timesheet>";
                     ApiUtil.setExampleResponse(request, "application/xml", exampleString);
                     break;
                 }
@@ -196,12 +196,12 @@ public interface TimesheetApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"Start\" : \"2000-01-23T04:56:07.000+00:00\", \"working-hours\" : 0.8008281904610115, \"weekday\" : \"2000-01-23\", \"End\" : \"2000-01-23T04:56:07.000+00:00\", \"tid\" : 1 }";
+                    String exampleString = "{ \"StartTime\" : \"2000-01-23T04:56:07.000+00:00\", \"working-hours\" : 0.8008281904610115, \"weekday\" : \"2000-01-23\", \"EndTime\" : \"2000-01-23T04:56:07.000+00:00\", \"tid\" : 1 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/xml"))) {
-                    String exampleString = "<timesheet> <tid>1</tid> <weekday>2000-01-23</weekday> <Start>2000-01-23T04:56:07.000Z</Start> <End>2000-01-23T04:56:07.000Z</End> <working-hours>3.149</working-hours> </timesheet>";
+                    String exampleString = "<timesheet> <tid>1</tid> <weekday>2000-01-23</weekday> <StartTime>2000-01-23T04:56:07.000Z</StartTime> <EndTime>2000-01-23T04:56:07.000Z</EndTime> <working-hours>3.149</working-hours> </timesheet>";
                     ApiUtil.setExampleResponse(request, "application/xml", exampleString);
                     break;
                 }

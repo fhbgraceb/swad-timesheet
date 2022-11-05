@@ -20,7 +20,7 @@ public class Timesheet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int tid;
     private String weekday;
-    private String start;
-    private String end;
+    private String startTime;
+    private String endTime;
     private double workingHours;
 }

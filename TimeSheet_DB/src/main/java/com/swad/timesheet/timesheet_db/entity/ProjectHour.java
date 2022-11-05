@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "PROJECT_HOUR")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
