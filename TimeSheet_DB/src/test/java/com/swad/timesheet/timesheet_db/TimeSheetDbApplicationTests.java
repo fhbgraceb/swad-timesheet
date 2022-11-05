@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Time;
 import java.util.List;
 
 @SpringBootTest
@@ -59,7 +60,17 @@ class TimeSheetDbApplicationTests {
 
     @Test
     void testTimeSheet(){
-        timesheetRepository.save(Timesheet.builder().startTime("8.00").endTime("15.00").workingHours(8.0).weekday("Monday").build());
+        userRepository.save(User.builder().username("Watson").build());
+        projectRepository.save(Project.builder().name("FindCatName").build());
+        List<User> users = userRepository.findByUsernameContainsIgnoreCase("watson");
+        User user = users.get(0);
+        List<Project> projects = projectRepository.findByNameContainingIgnoreCase("findcatname");
+        Project project = projects.get(0);
+        timesheetRepository.save(Timesheet.builder().startTime("8.00").endTime("15.00").workingHours(8.0).weekday("Monday").project(project).user(user).build());
+        List<Timesheet> timesheets = timesheetRepository.findAll();
+        timesheets.forEach(System.out::println);
+
+
     }
 
 

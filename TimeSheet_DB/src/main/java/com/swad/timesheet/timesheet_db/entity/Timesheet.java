@@ -23,4 +23,14 @@ public class Timesheet {
     private String startTime;
     private String endTime;
     private double workingHours;
+
+    @ManyToOne
+    @JoinColumn(name="Project_pid", nullable = false)
+    private Project project;
+
+    @ManyToOne
+    @JoinColumn(name="User_uid", nullable = false)
+    private User user;
+    //project
+    //user
 }
