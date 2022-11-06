@@ -1,3 +1,5 @@
+//class not necessary - User and project linked to timesheet
+
 package com.swad.timesheet.timesheet_db.entity;
 
 
@@ -7,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 
 @Entity
 @Table(name = "PROJECT_HOUR")
