@@ -1,27 +1,27 @@
-package com.swad.timesheet.timesheet_db.entity;
+package dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
-@Table(name = "USERS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+public class UserDto {
     private int uid;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+
+
 
 }
