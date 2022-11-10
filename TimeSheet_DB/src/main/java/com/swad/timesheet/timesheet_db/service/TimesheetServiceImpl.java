@@ -9,6 +9,7 @@ import dto.TimesheetDto;
 import dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimesheetServiceImpl implements TimesheetService {
@@ -29,6 +30,30 @@ public class TimesheetServiceImpl implements TimesheetService {
     @Override
     public List<TimesheetDto> getTimesheetsbyProject(Project project) {
         List<Timesheet> timesheets = timesheetRepository.findByProject(project);
+        return timesheetMapper.mapToDto(timesheets);
+    }
+
+    @Override
+    public List<TimesheetDto> getTimesheetsByStartingTime(String time) {
+        List<Timesheet> allTimesheets = timesheetRepository.findAll();
+        List<Timesheet> timesheets = new ArrayList<Timesheet>();
+        allTimesheets.forEach((temp) -> {
+            if (temp.getStartTime() == time){
+                timesheets.add(temp);
+            }
+        });
+        return timesheetMapper.mapToDto(timesheets);
+    }
+
+    @Override
+    public List<TimesheetDto> findByWeekday(String weekday) {
+        List<Timesheet> allTimesheets = timesheetRepository.findAll();
+        List<Timesheet> timesheets = new ArrayList<Timesheet>();
+        allTimesheets.forEach((temp) -> {
+            if (temp.getWeekday() == weekday){
+                timesheets.add(temp);
+            } 
+        });
         return timesheetMapper.mapToDto(timesheets);
     }
 }

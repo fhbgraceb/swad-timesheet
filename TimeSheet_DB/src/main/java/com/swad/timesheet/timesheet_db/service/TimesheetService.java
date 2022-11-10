@@ -10,5 +10,7 @@ public interface TimesheetService {
 
     List<TimesheetDto> getTimesheetsbyUser(UserDto user);
     List<TimesheetDto> getTimesheetsbyProject (Project project);
+    List<TimesheetDto> getTimesheetsByStartingTime (String time);
+    List<TimesheetDto> findByWeekday(String string); 
 
 }

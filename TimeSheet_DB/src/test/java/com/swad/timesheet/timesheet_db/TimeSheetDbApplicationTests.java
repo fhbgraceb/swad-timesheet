@@ -9,6 +9,7 @@ import com.swad.timesheet.timesheet_db.interfaces.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Assertions;
 
 import java.sql.Time;
 import java.util.List;
@@ -30,32 +31,24 @@ class TimeSheetDbApplicationTests {
     }
 
     @Test
-    void testCreateProject() {
+    void testCreateProject() { 
         projectRepository.save(Project.builder().name("MasterTestProject").build());
         projectRepository.save(Project.builder().name("TestProject").build());
         projectRepository.save(Project.builder().name("TinyTestProject").build());
-        System.out.println(projectRepository.count());
-        List<Project> projects = projectRepository.findAll();
-        projects.forEach(System.out::println);
+
+        Assertions.assertEquals(3, projectRepository.count());
+
+        Assertions.assertNotNull(projectRepository.findByNameContainingIgnoreCase("TestProject"));
     }
 
     @Test
     void testCreateUser(){
-        User Testuser = User.builder().username("Semmel").build();
-//        Testuser.setEmail("Testmail");
-//        Testuser.setPassword("testpw");
-//        Testuser.setLastName("TestLN");
-//        Testuser.setFirstName("TestFN");
-//        Testuser.setId(100);
-//        userRepository.save(Testuser);
         userRepository.save(User.builder().username("Semmel").build());
-       // userRepository.save(User.builder().username("Semmel").firstName("Herr").lastName("Semmel").email("herr.semmel@katze.org").password("Kratzbaum123").build());
         userRepository.save(User.builder().username("Brösel").firstName("Frau").lastName("Brösel").email("frau.broesel@meerschweinchen.com").password("erbsenflocke666").build());
-        List<User> user = userRepository.findByUsernameContainsIgnoreCase("semmel");
-        user.forEach(System.out::println);
-        List<User> users = userRepository.findAll();
-        users.forEach(System.out::println);
-        System.out.println(userRepository.count());
+    
+        Assertions.assertEquals(2, userRepository.count());
+
+        Assertions.assertNotNull(userRepository.findByUsernameContainsIgnoreCase("semmel"));
     }
 
     @Test
@@ -67,9 +60,12 @@ class TimeSheetDbApplicationTests {
         List<Project> projects = projectRepository.findByNameContainingIgnoreCase("findcatname");
         Project project = projects.get(0);
         timesheetRepository.save(Timesheet.builder().startTime("8.00").endTime("15.00").workingHours(8.0).weekday("Monday").project(project).user(user).build());
-        List<Timesheet> timesheets = timesheetRepository.findAll();
-        timesheets.forEach(System.out::println);
+        
+        Assertions.assertNotNull(timesheetRepository.findByProject(project));
 
+        Assertions.assertNotNull(timesheetRepository.findByStartTime("8.00"));
+
+        Assertions.assertNotNull(timesheetRepository.findByWeekday("Monday")); 
 
     }
 

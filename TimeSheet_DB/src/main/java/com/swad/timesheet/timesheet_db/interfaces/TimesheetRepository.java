@@ -11,5 +11,6 @@ public interface TimesheetRepository extends JpaRepository<Timesheet, Long> {
 
        List<Timesheet> findByUser(User user);
        List<Timesheet> findByProject (Project project);
-
+       List<Timesheet> findByStartTime (String time);
+       List<Timesheet> findByWeekday (String time);
 }
