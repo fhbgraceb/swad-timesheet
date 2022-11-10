@@ -37,6 +37,8 @@ class TimeSheetDbApplicationTests {
         Assertions.assertEquals(3, projectRepository.count());
 
         Assertions.assertNotNull(projectRepository.findByNameContainingIgnoreCase("TestProject"));
+
+        Assertions.assertNotNull(projectRepository.findByNameContainingIgnoreCase("testproject"));
     }
 
     @Test
@@ -45,6 +47,8 @@ class TimeSheetDbApplicationTests {
         userRepository.save(User.builder().username("Brösel").firstName("Frau").lastName("Brösel").email("frau.broesel@meerschweinchen.com").password("erbsenflocke666").build());
     
         Assertions.assertEquals(2, userRepository.count());
+
+        Assertions.assertNotNull(userRepository.findByUsernameContainsIgnoreCase("brösel"));
 
         Assertions.assertNotNull(userRepository.findByUsernameContainsIgnoreCase("Brösel"));
 
