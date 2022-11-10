@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Assertions;
-
-import java.sql.Time;
 import java.util.List;
 
 @SpringBootTest
@@ -47,6 +45,8 @@ class TimeSheetDbApplicationTests {
         userRepository.save(User.builder().username("Brösel").firstName("Frau").lastName("Brösel").email("frau.broesel@meerschweinchen.com").password("erbsenflocke666").build());
     
         Assertions.assertEquals(2, userRepository.count());
+
+        Assertions.assertNotNull(userRepository.findByUsernameContainsIgnoreCase("Brösel"));
 
         Assertions.assertNotNull(userRepository.findByUsernameContainsIgnoreCase("semmel"));
     }
