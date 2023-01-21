@@ -20,9 +20,9 @@ import javax.persistence.*;
 public class ProjectHour {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int pHid;
-    private double bookedHours;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int phid;
+    private double bookedhours;
 
     @ManyToOne
     @JoinColumn(name = "Timesheet_tid", nullable = false)

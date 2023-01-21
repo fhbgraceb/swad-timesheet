@@ -17,12 +17,12 @@ import javax.persistence.*;
 public class Timesheet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tid;
     private String weekday;
-    private String startTime;
-    private String endTime;
-    private double workingHours;
+    private String starttime;
+    private String endtime;
+    private double workinghours;
 
     @ManyToOne
     @JoinColumn(name="Project_pid", nullable = false)

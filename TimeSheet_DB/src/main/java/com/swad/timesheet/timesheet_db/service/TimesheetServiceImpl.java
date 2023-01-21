@@ -8,10 +8,12 @@ import com.swad.timesheet.timesheet_db.service.mapper.UserMapper;
 import dto.TimesheetDto;
 import dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TimesheetServiceImpl implements TimesheetService {
 
     @Autowired
@@ -38,7 +40,7 @@ public class TimesheetServiceImpl implements TimesheetService {
         List<Timesheet> allTimesheets = timesheetRepository.findAll();
         List<Timesheet> timesheets = new ArrayList<Timesheet>();
         allTimesheets.forEach((temp) -> {
-            if (temp.getStartTime() == time){
+            if (temp.getStarttime() == time){
                 timesheets.add(temp);
             }
         });

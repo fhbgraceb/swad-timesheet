@@ -14,8 +14,8 @@ public class UserMapper extends AbstractMapper <User, UserDto> {
         return UserDto.builder()
                 .uid(user.getUid())
                 .username(user.getUsername())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
                 .email(user.getEmail())
                 .build();
     }
@@ -25,8 +25,8 @@ public class UserMapper extends AbstractMapper <User, UserDto> {
         return User.builder()
                 .uid(userDto.getUid())
                 .username(userDto.getUsername())
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
+                .firstname(userDto.getFirstname())
+                .lastname(userDto.getLastname())
                 .email(userDto.getEmail())
                 .build();
     }

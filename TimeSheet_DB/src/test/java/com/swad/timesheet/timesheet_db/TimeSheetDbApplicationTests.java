@@ -44,7 +44,7 @@ class TimeSheetDbApplicationTests {
     @Test
     void testCreateUser(){
         userRepository.save(User.builder().username("Semmel").build());
-        userRepository.save(User.builder().username("Brösel").firstName("Frau").lastName("Brösel").email("frau.broesel@meerschweinchen.com").password("erbsenflocke666").build());
+        userRepository.save(User.builder().username("Brösel").firstname("Frau").lastname("Brösel").email("frau.broesel@meerschweinchen.com").password("erbsenflocke666").build());
     
         Assertions.assertEquals(2, userRepository.count());
 
@@ -63,11 +63,11 @@ class TimeSheetDbApplicationTests {
         User user = users.get(0);
         List<Project> projects = projectRepository.findByNameContainingIgnoreCase("findcatname");
         Project project = projects.get(0);
-        timesheetRepository.save(Timesheet.builder().startTime("8.00").endTime("15.00").workingHours(8.0).weekday("Monday").project(project).user(user).build());
+        timesheetRepository.save(Timesheet.builder().starttime("8.00").endtime("15.00").workinghours(8.0).weekday("Monday").project(project).user(user).build());
         
         Assertions.assertNotNull(timesheetRepository.findByProject(project));
 
-        Assertions.assertNotNull(timesheetRepository.findByStartTime("8.00"));
+        Assertions.assertNotNull(timesheetRepository.findByStarttime("8.00"));
 
         Assertions.assertNotNull(timesheetRepository.findByWeekday("Monday")); 
 

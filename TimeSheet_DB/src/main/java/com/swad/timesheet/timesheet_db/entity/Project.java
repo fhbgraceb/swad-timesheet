@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pid;
     private String name;
 

@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 public class TimesheetDto {
     private int tid;
     private String weekday;
-    private String startTime;
-    private String endTime;
-    private double workingHours;
+    private String starttime;
+    private String endtime;
+    private double workinghours;
 
     private Project project;
 
