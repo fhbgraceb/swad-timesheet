@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     //    List<User> findByUsernameContainsIgnoreCase(String username);
     List<Project> findByNameContainingIgnoreCase(String name);
+
+    Project findByPid(int pid);
 }
